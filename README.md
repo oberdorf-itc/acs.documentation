@@ -25,6 +25,7 @@ The system can be deployed on a single Docker Compose host for smaller installat
 | Messaging | MQTT |
 | Authentication & Configuration | LDAP |
 | Notifications | SMTP, Pushover |
+| Monitoring & Observability | Prometheus, Grafana |
 
 ## System Components
 
@@ -85,6 +86,14 @@ Communicates with:
 - `acs-manager-backend-api` for configuration management
 - `feig-reader-communication-api` for reader operations
 
+### 11. Prometheus Service
+
+Collects metrics from all microservice containers. Scrapes targets at regular intervals and stores time-series data for monitoring and alerting.
+
+### 12. Grafana Service
+
+Visualizes metrics and logs from Prometheus and OpenSearch. Provides dashboards for system health, access events, and service performance analysis.
+
 ## Data Flow
 
 ### Access Control Flow
@@ -128,6 +137,8 @@ All services in this architecture are packaged and deployed as Docker containers
 | Logging Service | Docker container |
 | FEIG Reader Notify Service | Docker container |
 | ACS Manager Web GUI / Frontend Service | Docker container |
+| Prometheus Service | Docker container |
+| Grafana Service | Docker container |
 
 ## Deployment Options
 
@@ -174,14 +185,23 @@ Synchronous communication for configuration and web requests:
 5. **Real-time Logging** - OpenSearch for audit trails and analytics
 6. **Multi-channel Notifications** - Email and Pushover alerts
 7. **Cloud-Agnostic** - Runs anywhere with Docker support
+8. **Observability** - Prometheus metrics collection and Grafana dashboards
 
 ## Repository Structure
 
 ```
 acs.documentation/
-├── README.md           # This file
-├── LICENSE             # License information
-└── media/              # Architecture diagrams and images
+├── README.md              # Project overview
+├── LICENSE                # License information
+├── AGENTS.md              # AI agent guidelines
+├── CODE_OF_CONDUCT.md     # Community guidelines
+├── CONTRIBUTING.md        # Contribution guide
+├── SECURITY.md            # Security policy
+├── .pre-commit-config.yaml
+├── .tool-versions
+├── .yamllint
+├── docs/                  # Documentation files (if any)
+└── media/                 # Architecture diagrams and images
     ├── acs-pushover-icon.png
     └── 2026-03-21-microservice-architecture.png
 ```
