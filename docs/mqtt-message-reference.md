@@ -19,7 +19,7 @@
     "user_dn",
     "user_display_name",
     "status",
-    "send_mail"
+    "notification"
   ],
   "properties": {
     "timestamp": {
@@ -75,8 +75,8 @@
 
 **Description:**
 
-* `entrypoint_ip` uses "format": "`ipv4`".
-* `transponder_uid` uses a hex pattern (^[A-Fa-f0-9]{8,20}$) which covers common RFID UID lengths (4, 7, and 10 bytes represented as hex).
+* `entrypoint_ip` uses "`format`": "`ipv4`".
+* `transponder_uid` uses a hex pattern (`^[A-Fa-f0-9]{8,20}$`) which covers common RFID UID lengths (4, 7, and 10 bytes represented as hex).
 * `user_dn` has a loose pattern requiring it to start with `UID=` or `uid=`.
 * `user_id` is kept as a plain string since the ID format wasn't specified.
 * `notification` is a strict boolean, so string values like "true" would be rejected.
@@ -93,7 +93,7 @@
   "user_dn": "<LDAP destinguished name of the user object>",
   "user_display_name": "<Name of the user>",
   "status": "<granted|denied>",
-  "send_mail": true|false
+  "notification": true|false
 }
 ```
 
