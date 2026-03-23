@@ -211,3 +211,4 @@ acs.documentation/
 - [Architecture Overview](docs/architecture-overview.md) - Detailed system architecture
 - [API Reference](docs/api-reference.md) - Web API documentation
 - [IoT Integration Guide](docs/iot-integration.md) - Device connection guidelines
+- [MQTT message reference](docs/mqtt-message-reference.md) - reference of mesages used inside the MQTT topics send by the ACS
