@@ -12,20 +12,19 @@ The system can be deployed on a single Docker Compose host for smaller installat
 
 ## Architecture Diagram
 
-![Microservice Architecture](media/2026-03-21-microservice-architecture.png)
+![Microservice Architecture](media/2026-03-24-microservice-architecture.png)
 
 ## Technology Stack
 
-| Category | Technology |
-|----------|------------|
-| Container Platform | Docker, Docker Compose, Kubernetes |
-| Backend | Python, Java, PHP |
-| Frontend | PHP, JavaScript |
-| Database | OpenSearch |
-| Messaging | MQTT |
-| Authentication & Configuration | LDAP |
-| Notifications | SMTP, Pushover |
-| Monitoring & Observability | Prometheus, Grafana |
+| Category                       | Technology                                        |
+|--------------------------------|---------------------------------------------------|
+| Container Platform             | Docker, Docker Compose, Kubernetes                |
+| Backend                        | Python, Java, PHP                                 |
+| Frontend                       | PHP, JavaScript                                   |
+| Messaging                      | MQTT                                              |
+| Authentication & Configuration | LDAP                                              |
+| Notifications                  | SMTP, Pushover                                    |
+| Monitoring & Observability     | OpenSeach, VictoriaMetrics, VictoriaLogs, Grafana |
 
 ## System Components
 
@@ -86,19 +85,19 @@ Communicates with:
 - `acs-manager-backend-api` for configuration management
 - `feig-reader-communication-api` for reader operations
 
-### 11. Prometheus Service
+### 11. VictoriaMetrics and VictoriaLogs Service
 
 Collects metrics from all microservice containers. Scrapes targets at regular intervals and stores time-series data for monitoring and alerting.
 
 ### 12. Grafana Service
 
-Visualizes metrics and logs from Prometheus and OpenSearch. Provides dashboards for system health, access events, and service performance analysis.
+Visualizes metrics and logs from VictoriaMetrics, VictoriaLogs and OpenSearch. Provides dashboards for system health, access events, and service performance analysis.
 
 ## Data Flow
 
 ### Access Control Flow
 
-```
+```text
 1. RFID Transponder → RFID Reader → ACS Broker
 2. ACS Broker → LDAP (validate credentials)
 3. LDAP → ACS Broker (validation result)
@@ -112,13 +111,13 @@ Visualizes metrics and logs from Prometheus and OpenSearch. Provides dashboards 
 
 ### Configuration Management Flow
 
-```
+```text
 ACS Manager Web GUI → ACS Manager Backend API → LDAP
 ```
 
 ### Reader Communication Flow
 
-```
+```text
 ACS Manager Web GUI → FEIG Reader Communication API → RFID Reader
 ```
 
@@ -126,19 +125,20 @@ ACS Manager Web GUI → FEIG Reader Communication API → RFID Reader
 
 All services in this architecture are packaged and deployed as Docker containers:
 
-| Service | Container |
-|---------|-----------|
-| ACS Broker | Docker container |
-| ACS Manager Backend API | Docker container |
-| FEIG Reader Communication API | Docker container |
-| Relay Control Service | Docker container |
-| SMTP Bridge Service | Docker container |
-| Pushover Bridge Service | Docker container |
-| Logging Service | Docker container |
-| FEIG Reader Notify Service | Docker container |
+| Service                                | Container        |
+|----------------------------------------|------------------|
+| ACS Broker                             | Docker container |
+| ACS Manager Backend API                | Docker container |
+| FEIG Reader Communication API          | Docker container |
+| Relay Control Service                  | Docker container |
+| SMTP Bridge Service                    | Docker container |
+| Pushover Bridge Service                | Docker container |
+| Logging Service                        | Docker container |
+| FEIG Reader Notify Service             | Docker container |
 | ACS Manager Web GUI / Frontend Service | Docker container |
-| Prometheus Service | Docker container |
-| Grafana Service | Docker container |
+| VictoriaMetrics                        | Docker container |
+| VictoriaLogs                           | Docker container |
+| Grafana Service                        | Docker container |
 
 ## Deployment Options
 
@@ -185,7 +185,7 @@ Synchronous communication for configuration and web requests:
 5. **Real-time Logging** - OpenSearch for audit trails and analytics
 6. **Multi-channel Notifications** - Email and Pushover alerts
 7. **Cloud-Agnostic** - Runs anywhere with Docker support
-8. **Observability** - Prometheus metrics collection and Grafana dashboards
+8. **Observability** - VictoriaMetrics metrics collection, VictoriaLogs log collection and Grafana dashboards
 
 ## Repository Structure
 
@@ -203,7 +203,7 @@ acs.documentation/
 ├── docs/                  # Documentation files (if any)
 └── media/                 # Architecture diagrams and images
     ├── acs-pushover-icon.png
-    └── 2026-03-21-microservice-architecture.png
+    └── 2026-03-24-microservice-architecture.png
 ```
 
 ## Documentation
