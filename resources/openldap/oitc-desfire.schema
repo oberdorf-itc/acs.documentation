@@ -1,0 +1,393 @@
+# $OITC$
+## This work is part of Michael Oberdorf IT-Consulting
+##   <http://www.oberdorf-itc.de/>
+##
+## Copyright 2010-2015 Michael Oberdorf IT-Consulting
+## All rights reserved.
+##
+## The schema describes a MIFARE DESFire RFID transponder
+## with its general transponder parameters and definitions
+## for DESFire applications and files
+##
+## Redistribution and use in source and binary forms, with or without
+## modification, are permitted only if authorized by Michael Oberdorf
+## IT-Consulting.
+##
+
+# Depends upon core.schema, cosine.schema and nis.schema
+
+# OID Base is iso(1) org(3) dod(6) internet(1) private(4) enterprise(1) Cybcon Industries(15432)
+#   1.3.6.1.4.1.15432
+#
+# Attribute types are under 1.3.6.1.4.1.15432.3.1.1
+# Object classes are under 1.3.6.1.4.1.15432.3.1.2
+
+#############################################################################
+# Attribute Type Definitions (1.3.6.1.4.1.15432.3.1.1.x)
+
+# General transponder data
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.0 NAME 'oitcTransponderID'
+        DESC 'A RFID transponder unique ID'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.1 NAME 'oitcTransponderType'
+        DESC 'A RFID transponder type name (such as MIFARE DESFire EV1)'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.2 NAME 'oitcRFIDHardwareVendorID'
+        DESC 'The hardware vendor ID of the RFID transponder'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{2} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.3 NAME 'oitcRFIDHardwareType'
+        DESC 'The hardware type of the RFID transponder'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{2} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.4 NAME 'oitcRFIDHardwareSubtype'
+        DESC 'The hardware subtype of the RFID transponder'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{2} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.5 NAME 'oitcRFIDHardwareVersion'
+        DESC 'The hardware version of the RFID transponder'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.6 NAME 'oitcRFIDHardwareStorage'
+        DESC 'The hardware storage size in bytes of the RFID transponder'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.7 NAME 'oitcRFIDHardwareProtocol'
+        DESC 'The hardware protocol'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{2} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.8 NAME 'oitcRFIDSoftwareVendorID'
+        DESC 'The software vendor ID of the RFID transponder'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{2} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.9 NAME 'oitcRFIDSoftwareType'
+        DESC 'The software type of the RFID transponder'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{2} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.10 NAME 'oitcRFIDSoftwareSubtype'
+        DESC 'The software subtype of the RFID transponder'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{2} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.11 NAME 'oitcRFIDSoftwareVersion'
+        DESC 'The software version of the RFID transponder'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.12 NAME 'oitcRFIDSoftwareStorage'
+        DESC 'The software storage size in bytes of the RFID transponder'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.13 NAME 'oitcRFIDSoftwareProtocol'
+        DESC 'The software protocol'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{2} SINGLE-VALUE )
+
+# PICC Level configuration
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.14 NAME 'oitcRFIDpICCLevelCryptoType'
+        DESC 'The cipher to use to authenticate to PICC (DES, AES, TDES, ...)'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.15 NAME 'oitcRFIDpICCLevelMasterKey'
+        DESC 'The PICC master key in HEX notation'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.16 NAME 'oitcRFIDpICCLevelChangeMasterKeyAllowed'
+        DESC 'RFID transponder PICC level configuration: change master key allowed'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.17 NAME 'oitcRFIDpICCLevelDirectoryListWithMasterKey'
+        DESC 'RFID transponder PICC level configuration: Directory list with master key'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.18 NAME 'oitcRFIDpICCLevelCreateDeleteWithMasterKey'
+        DESC 'RFID transponder PICC level configuration: Create/Delete with master key'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.19 NAME 'oitcRFIDpICCLevelConfigurationChangeable'
+        DESC 'RFID transponder PICC level configuration: configuration changeable'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.20 NAME 'oitcRFIDpICCLevelRandomTransponderID'
+        DESC 'RFID transponder PICC level configuration: usage of random transponder ID'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.21 NAME 'oitcRFIDpICCLevelFormatAllowed'
+        DESC 'RFID transponder PICC level configuration: Is it allowed to format the RFID transponder'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+# configuration data on application level
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.22 NAME 'oitcRFIDApplicationID'
+        DESC 'RFID transponder application ID (AID) in HEX notation'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{6} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.23 NAME 'oitcRFIDApplicationCryptoType'
+        DESC 'The cipher to use to authenticate to application (DES, AES, TDES, ...)'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.24 NAME 'oitcRFIDApplicationNumberOfKeys'
+        DESC 'The number of keys to use within the application'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.25 NAME 'oitcRFIDApplicationChangeKey'
+        DESC 'The key number that is allowed to change the application'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{2} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.26 NAME 'oitcRFIDApplicationChangeMasterKeyAllowed'
+        DESC 'RFID transponder application level configuration: change master key allowed'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.27 NAME 'oitcRFIDApplicationDirectoryListWithMasterKey'
+        DESC 'RFID transponder application level configuration: Directory list with master key'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.28 NAME 'oitcRFIDApplicationCreateDeleteWithMasterKey'
+        DESC 'RFID transponder application level configuration: Create/Delete with master key'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.29 NAME 'oitcRFIDApplicationConfigurationChangeable'
+        DESC 'RFID transponder application level configuration: configuration changeable'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.30 NAME 'oitcRFIDApplicationKey01'
+        DESC 'The application key 1'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.31 NAME 'oitcRFIDApplicationKey02'
+        DESC 'The application key 2'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.32 NAME 'oitcRFIDApplicationKey03'
+        DESC 'The application key 3'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.33 NAME 'oitcRFIDApplicationKey04'
+        DESC 'The application key 4'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.34 NAME 'oitcRFIDApplicationKey05'
+        DESC 'The application key 5'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.35 NAME 'oitcRFIDApplicationKey06'
+        DESC 'The application key 6'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.36 NAME 'oitcRFIDApplicationKey07'
+        DESC 'The application key 7'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.37 NAME 'oitcRFIDApplicationKey08'
+        DESC 'The application key 8'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.38 NAME 'oitcRFIDApplicationKey09'
+        DESC 'The application key 9'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.39 NAME 'oitcRFIDApplicationKey10'
+        DESC 'The application key 10'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.40 NAME 'oitcRFIDApplicationKey11'
+        DESC 'The application key 11'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.41 NAME 'oitcRFIDApplicationKey12'
+        DESC 'The application key 12'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.42 NAME 'oitcRFIDApplicationKey13'
+        DESC 'The application key 13'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.43 NAME 'oitcRFIDApplicationKey14'
+        DESC 'The application key 14'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{48} SINGLE-VALUE )
+
+# configuration data on file level
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.44 NAME 'oitcRFIDFileID'
+        DESC 'RFID transponder file ID (FID) in HEX notation'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{2} SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.45 NAME 'oitcRFIDFileCommunication'
+        DESC 'RFID transponder communication type (plain, mac, complete)'
+        EQUALITY caseIgnoreIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.46 NAME 'oitcRFIDFileAccessReadKey'
+        DESC 'File read key number'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.47 NAME 'oitcRFIDFileAccessWriteKey'
+        DESC 'File write key number'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.48 NAME 'oitcRFIDFileAccessReadWriteKey'
+        DESC 'File read and write key number'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.49 NAME 'oitcRFIDFileAccessChangeKey'
+        DESC 'File change key number'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.50 NAME 'oitcRFIDFileSize'
+        DESC 'File size in bytes'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.51 NAME 'oitcRFIDFileLowerLimit'
+        DESC 'RFID value file lower limit'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.52 NAME 'oitcRFIDFileUpperLimit'
+        DESC 'RFID value file upper limit'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.53 NAME 'oitcRFIDFileValue'
+        DESC 'RFID value files initial value'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.54 NAME 'oitcRFIDFileLimitedCreditEnabled'
+        DESC 'RFID value file: is limited credit feature is enabled'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.55 NAME 'oitcRFIDFileRecordSize'
+        DESC 'RFID record files record size in bytes'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.15432.3.1.1.56 NAME 'oitcRFIDFileRecordCount'
+        DESC 'RFID record files: Maximum record counter'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+
+#############################################################################
+# Object Class Definitions (1.3.6.1.4.1.15432.3.1.2.x)
+
+objectclass ( 1.3.6.1.4.1.15432.3.1.2.0 NAME 'oitcTransponder'
+	DESC 'Abstraction of a RFID transponder chip'
+	SUP top STRUCTURAL
+        MUST oitcTransponderID
+        MAY ( macAddress $ oitcTransponderType $ oitcRFIDHardwareVendorID $
+                oitcRFIDHardwareType $ oitcRFIDHardwareVendorID $ oitcRFIDHardwareType $
+                oitcRFIDHardwareSubtype $ oitcRFIDHardwareVersion $ oitcRFIDHardwareStorage $
+                oitcRFIDHardwareProtocol $ oitcRFIDSoftwareVendorID $ oitcRFIDSoftwareType $
+                oitcRFIDSoftwareSubtype $ oitcRFIDSoftwareVersion $ oitcRFIDSoftwareStorage $
+                oitcRFIDSoftwareProtocol $ oitcRFIDpICCLevelCryptoType $ oitcRFIDpICCLevelMasterKey $
+                oitcRFIDpICCLevelChangeMasterKeyAllowed $ oitcRFIDpICCLevelDirectoryListWithMasterKey $
+                oitcRFIDpICCLevelCreateDeleteWithMasterKey $ oitcRFIDpICCLevelConfigurationChangeable $
+                oitcRFIDpICCLevelRandomTransponderID $ oitcRFIDpICCLevelFormatAllowed $
+                description ) )
+
+objectclass ( 1.3.6.1.4.1.15432.3.1.2.1 NAME 'oitcDESFireApplication'
+	DESC 'Abstraction of a MIFARE DESFire EV1 application'
+        SUP top STRUCTURAL
+        MUST oitcRFIDApplicationID
+        MAY ( oitcRFIDApplicationCryptoType $ oitcRFIDApplicationNumberOfKeys $
+                oitcRFIDApplicationChangeKey $ oitcRFIDApplicationChangeMasterKeyAllowed $
+                oitcRFIDApplicationDirectoryListWithMasterKey $ oitcRFIDApplicationCreateDeleteWithMasterKey $
+                oitcRFIDApplicationConfigurationChangeable $ oitcRFIDApplicationKey01 $
+                oitcRFIDApplicationKey02 $ oitcRFIDApplicationKey03 $ oitcRFIDApplicationKey04 $
+                oitcRFIDApplicationKey05 $ oitcRFIDApplicationKey06 $ oitcRFIDApplicationKey07 $
+                oitcRFIDApplicationKey08 $ oitcRFIDApplicationKey09 $ oitcRFIDApplicationKey10 $
+                oitcRFIDApplicationKey11 $ oitcRFIDApplicationKey12 $ oitcRFIDApplicationKey13 $
+                oitcRFIDApplicationKey14 $ description ) )
+
+objectclass ( 1.3.6.1.4.1.15432.3.1.2.2 NAME 'oitcDESFireStandardDataFile'
+        DESC 'Abstraction of a MIFARE DESFire EV1 standard data file'
+        SUP top STRUCTURAL
+        MUST oitcRFIDFileID
+        MAY ( oitcRFIDFileCommunication $ oitcRFIDFileAccessReadKey $ oitcRFIDFileAccessWriteKey $
+                oitcRFIDFileAccessReadWriteKey $ oitcRFIDFileAccessChangeKey $ oitcRFIDFileSize $
+                description ) )
+
+objectclass ( 1.3.6.1.4.1.15432.3.1.2.3 NAME 'oitcDESFireBackupDataFile'
+        DESC 'Abstraction of a MIFARE DESFire EV1 backup data file'
+        SUP top STRUCTURAL
+        MUST oitcRFIDFileID
+        MAY ( oitcRFIDFileCommunication $ oitcRFIDFileAccessReadKey $ oitcRFIDFileAccessWriteKey $
+                oitcRFIDFileAccessReadWriteKey $ oitcRFIDFileAccessChangeKey $ oitcRFIDFileSize $
+                description ) )
+
+objectclass ( 1.3.6.1.4.1.15432.3.1.2.4 NAME 'oitcDESFireValueFile'
+        DESC 'Abstraction of a MIFARE DESFire EV1 value file'
+        SUP top STRUCTURAL
+        MUST oitcRFIDFileID
+        MAY ( oitcRFIDFileCommunication $ oitcRFIDFileAccessReadKey $ oitcRFIDFileAccessWriteKey $
+                oitcRFIDFileAccessReadWriteKey $ oitcRFIDFileAccessChangeKey $ oitcRFIDFileLowerLimit $
+                oitcRFIDFileUpperLimit $ oitcRFIDFileValue $ oitcRFIDFileLimitedCreditEnabled $
+                description ) )
+
+objectclass ( 1.3.6.1.4.1.15432.3.1.2.5 NAME 'oitcDESFireLinearRecordFile'
+        DESC 'Abstraction of a MIFARE DESFire EV1 linear record file'
+        SUP top STRUCTURAL
+        MUST oitcRFIDFileID
+        MAY ( oitcRFIDFileCommunication $ oitcRFIDFileAccessReadKey $ oitcRFIDFileAccessWriteKey $
+                oitcRFIDFileAccessReadWriteKey $ oitcRFIDFileAccessChangeKey $
+                oitcRFIDFileRecordSize $ oitcRFIDFileRecordCount $ description ) )
+
+objectclass ( 1.3.6.1.4.1.15432.3.1.2.6 NAME 'oitcDESFireCyclicRecordFile'
+        DESC 'Abstraction of a MIFARE DESFire EV1 cyclic record file'
+        SUP top STRUCTURAL
+        MUST oitcRFIDFileID
+        MAY ( oitcRFIDFileCommunication $ oitcRFIDFileAccessReadKey $ oitcRFIDFileAccessWriteKey $
+                oitcRFIDFileAccessReadWriteKey $ oitcRFIDFileAccessChangeKey $
+                oitcRFIDFileRecordSize $ oitcRFIDFileRecordCount $ description ) )
