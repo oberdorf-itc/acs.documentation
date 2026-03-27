@@ -1,0 +1,125 @@
+dn: dc=oberdorf-itc,dc=de
+objectClass: top
+objectClass: dcObject
+dc: oberdorf-itc
+
+dn: ou=OITC Access Control System,dc=oberdorf-itc,dc=de
+description: Oberdorf IT-Consulting Access Control System
+objectClass: organizationalUnit
+ou: OITC Access Control System
+
+dn: ou=Entry Points,ou=OITC Access Control System,dc=oberdorf-itc,dc=de
+objectClass: organizationalUnit
+ou: Entry Points
+description: RFID Reader Entry Points. RFID Leser werden hier Zugangspunkten zugeordnet.
+
+dn: ou=Transponders,ou=OITC Access Control System,dc=oberdorf-itc,dc=de
+objectClass: organizationalUnit
+ou: Transponders
+description: RFID Transponder Chips. Alle initialisierten Transponderchips werden hier au
+ fgeführt. Diese Chips können bei Verlust deaktiviert werden.
+
+dn: ou=Access Roles,ou=OITC Access Control System,dc=oberdorf-itc,dc=de
+objectClass: organizationalUnit
+ou: Access Roles
+description: Rollendefinitionen für den Zugriff auf Resourcen. Rollen haben die Berechti
+ gung auf Resourcen zuzugreifen unterliegen aber ggf. besonderen limitierende
+ n Regeln.
+
+dn: ou=Access Rules,ou=OITC Access Control System,dc=oberdorf-itc,dc=de
+objectClass: organizationalUnit
+ou: Access Rules
+description: Regeln für den Zugriff auf Resourcen. diese Regelen haben einen limitierend
+ en Einfluss auf die Zugangsberechtigung.
+
+dn: cn=noLimit,ou=Access Rules,ou=OITC Access Control System,dc=oberdorf-itc,dc=de
+description: Default rule without any limitation
+cn: noLimit
+objectClass: oitcACSAccessLimitation
+
+dn: ou=Users,dc=oberdorf-itc,dc=de
+description: Benutzerverwaltung
+objectClass: organizationalUnit
+ou: Users
+
+dn: ou=Technical Accounts,dc=oberdorf-itc,dc=de
+description: Technische Benutzer Accounts
+objectClass: organizationalUnit
+ou: Technical Accounts
+
+dn: uid=Directory Manager,ou=Technical Accounts,dc=oberdorf-itc,dc=de
+uid: Directory Manager
+cn: Directory Manager
+objectClass: inetOrgPerson
+sn: Directory Manager
+
+dn: uid=ACS Manager,ou=Technical Accounts,dc=oberdorf-itc,dc=de
+description: Technischer Benutzer für das ACS Management System
+uid: ACS Manager
+cn: ACS Manager
+objectClass: inetOrgPerson
+sn: ACS Manager
+
+dn: uid=Card Management System,ou=Technical Accounts,dc=oberdorf-itc,dc=de
+uid: Card Management System
+cn: Card Management System
+objectClass: inetOrgPerson
+sn: Card Management System
+description: Technischer Benutzer für das RFID TAG Management System
+
+dn: uid=ACS Relay Control Service,ou=Technical Accounts,dc=oberdorf-itc,dc=de
+uid: ACS Relay Control Service
+cn: ACS Relay Control Service
+objectClass: inetOrgPerson
+sn: ACS Relay Control Service
+description: Technischer Benutzer für den ACS Relay Control Service
+
+dn: ou=Groups,dc=oberdorf-itc,dc=de
+description: Benutzer Gruppen
+objectClass: organizationalUnit
+ou: Groups
+
+dn: cn=Directory Administrators,ou=Groups,dc=oberdorf-itc,dc=de
+cn: Directory Administrators
+objectClass: groupOfUniqueNames
+
+dn: cn=OITC ACS Administrators,ou=Groups,dc=oberdorf-itc,dc=de
+description: Michael Oberdorf IT-Consulting Access Control System - Gruppe der Administra
+ toren mit Schreibzugriff
+cn: OITC ACS Administrators
+objectClass: groupOfUniqueNames
+
+dn: ou=Notify Configuration,ou=OITC Access Control System,dc=oberdorf-itc,dc=de
+description: Reader Notification Configuration
+objectClass: organizationalUnit
+ou: Notify Configuration
+
+dn: oitcACSNotifyId=error,ou=Notify Configuration,ou=OITC Access Control System,dc=oberdorf-itc,dc=de
+description: Signal bei Fehlern wie zum Beispiel unauthorisierter Zugangsversuch
+oitcACSNotifyLEDNumber: 2
+objectClass: oitcACSNotifyConfiguration
+oitcACSNotifyBuzzer: TRUE
+oitcACSNotifyId: error
+oitcACSNotifyLED: TRUE
+oitcACSNotifySignalIntervalType: 2
+oitcACSNotifySignalTime: 7
+
+dn: oitcACSNotifyId=ok,ou=Notify Configuration,ou=OITC Access Control System,dc=oberdorf-itc,dc=de
+description: Signal wenn Authentisierung erfolgreich
+oitcACSNotifyLEDNumber: 1
+objectClass: oitcACSNotifyConfiguration
+oitcACSNotifyBuzzer: TRUE
+oitcACSNotifyId: ok
+oitcACSNotifyLED: TRUE
+oitcACSNotifySignalIntervalType: 1
+oitcACSNotifySignalTime: 4
+
+dn: oitcACSNotifyId=init,ou=Notify Configuration,ou=OITC Access Control System,dc=oberdorf-itc,dc=de
+description: Signal bei Leser Initialisierung
+oitcACSNotifyLEDNumber: 3
+objectClass: oitcACSNotifyConfiguration
+oitcACSNotifyBuzzer: TRUE
+oitcACSNotifyId: init
+oitcACSNotifyLED: TRUE
+oitcACSNotifySignalIntervalType: 1
+oitcACSNotifySignalTime: 3
