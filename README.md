@@ -197,7 +197,7 @@ Synchronous communication for configuration and web requests:
 
 ## Repository Structure
 
-```
+```text
 acs.documentation/
 ├── README.md              # Project overview
 ├── LICENSE                # License information
