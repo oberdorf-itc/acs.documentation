@@ -52,13 +52,21 @@ REST API for direct communication with Feig RFID readers. Operates in Host Mode 
 
 Subscribes to MQTT access events and triggers the corresponding door relay on successful authentication. Controls physical door lock mechanisms.
 
+- Repository: [acs.relay-control-service](https://github.com/oberdorf-itc/acs.relay-control-service)
+
 ### 6. SMTP Bridge Service
 
 Sends email notifications about access attempts. Publishes detailed access event information to configured email recipients.
 
+- Repository: [acs.smtp-bridge-service](https://github.com/oberdorf-itc/acs.smtp-bridge-service)
+- [![Docker Container][smtp-bridge-service-docker-release-shield]][smtp-bridge-service-docker-release-link]
+
 ### 7. Pushover Bridge Service
 
 Sends Pushover push notifications about access attempts to mobile devices. Provides real-time alerts for configured users.
+
+- Repository: [acs.pushover-bridge-service](https://github.com/oberdorf-itc/acs.pushover-bridge-service)
+- [![Docker Container][pushover-bridge-service-docker-release-shield]][pushover-bridge-service-docker-release-link]
 
 ### 8. Logging Service
 
@@ -201,9 +209,11 @@ acs.documentation/
 ├── .tool-versions
 ├── .yamllint
 ├── docs/                  # Documentation files (if any)
-└── media/                 # Architecture diagrams and images
-    ├── acs-pushover-icon.png
-    └── 2026-03-24-microservice-architecture.png
+├── media/                 # Architecture diagrams and images
+├   ├── acs-pushover-icon.png
+├   └── 2026-03-24-microservice-architecture.png
+└── resources/             # Additional resources
+    └── openldap/          # OpenLDAP specific resources
 ```
 
 ## Documentation
@@ -211,4 +221,10 @@ acs.documentation/
 - [Architecture Overview](docs/architecture-overview.md) - Detailed system architecture
 - [API Reference](docs/api-reference.md) - Web API documentation
 - [IoT Integration Guide](docs/iot-integration.md) - Device connection guidelines
-- [MQTT message reference](docs/mqtt-message-reference.md) - reference of mesages used inside the MQTT topics send by the ACS
+- [LDAP Integration Guide](docs/ldap-integration.md) - LDAP integration guidelines and schema descriptions
+- [MQTT message reference](docs/mqtt-message-reference.md) - Reference of mesages used inside the MQTT topics send by the ACS
+
+[smtp-bridge-service-docker-release-link]: https://hub.docker.com/r/oitc/acs.smtp-bridge-service
+[smtp-bridge-service-docker-release-shield]: https://img.shields.io/docker/v/oitc/acs.smtp-bridge-service?color=369eff&label=docker&labelColor=black&logo=docker&logoColor=white&style=flat-square
+[pushover-bridge-service-docker-release-link]: https://hub.docker.com/r/oitc/acs.pushover-bridge-service
+[pushover-bridge-service-docker-release-shield]: https://img.shields.io/docker/v/oitc/acs.pushover-bridge-service?color=369eff&label=docker&labelColor=black&logo=docker&logoColor=white&style=flat-square
