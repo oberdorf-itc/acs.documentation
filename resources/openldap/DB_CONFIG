@@ -1,0 +1,68 @@
+# IMPORTANT
+# Changes will only take effect after running db_recover on the
+# database this file controls. Make sure slapd is stopped and
+# nothing is accessing the db environment before running db_recover.
+#
+# Cache Size
+# Ideally the cache size should be set large enough to hold the entire
+# database. This is often not practical, so a good rule of thumb is to
+# specify a cache size equal to half the amount of physical memory in the
+# system. The syntax of this parameter is:
+#       set_cachesize
+# For additional information on selecting a cache size, see:
+# http://www.sleepycat.com/docs/ref/am_conf/cachesize.html
+#set_cachesize 0 2097152 0
+#set_cachesize  0       26214400        0
+# 64 MB Ram -> 32 MB Cache
+set_cachesize   0       33554432        0
+
+# Database Flags
+# About the most useful flag is DB_TXN_NOSYNC, which inhibits synchronous
+# flushing of transaction log files to disk. While setting this flag can
+# significantly improve write performance, it is not safe to use in normal
+# operation because it is possible some number of the most recently committed
+# transactions can be undone during recovery after a system crash. Symas
+# recommends setting this flag only when doing bulk loads of the database
+# using slapadd.
+# set_flags       DB_TXN_NOSYNC
+#
+# Another useful flag is DB_LOG_AUTOREMOVE, If set, Berkeley DB will
+# automatically remove log files that are no longer needed. Automatic log
+# file removal is likely to make catastrophic recovery impossible, so only
+# use this if you make routine full backups of the LDAP data. An alternative
+# to this flag is to call the db_archive command from cron. See the
+# db_archive documentation for additional information.
+set_flags       DB_LOG_AUTOREMOVE
+
+# Log File Max Size
+# The log file max size determines the point at which log files are rotated.
+# A good value for this setting is 10 MB.
+set_lg_max      10485760
+
+
+# Log Buffer Size
+# The log buffer size should be set to about one fifth the size of the max
+# log file size.
+set_lg_bsize    2097152
+
+# Log File Directory
+# The log files are written to continuously during ldap write operations.
+# This will cause a large number of disk seek operations to take place as
+# the system writes to both the database and log files, and  write
+# performance will be significantly reduced. It is therefore STRONGLY
+# recommended that the log file directory be placed on a different disk
+# drive than the datbase files.
+set_lg_dir      /var/lib/ldap/slapd-001/talogs
+
+# Temp Directory
+# Specify where Berkeley DB can create temp files. If possible, make this
+# a memory file system.
+set_tmp_dir     /tmp
+
+
+# other options from OpenLDAP Default DB_CONFIG
+set_lk_max_objects 1500
+set_lk_max_locks 1500
+set_lk_max_lockers 1500
+
+##EOF

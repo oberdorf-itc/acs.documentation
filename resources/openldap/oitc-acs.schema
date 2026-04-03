@@ -1,0 +1,125 @@
+# $OITC$
+## This work is part of Michael Oberdorf IT-Consulting Access Control System
+##   <http://www.oberdorf-itc.de/>
+##
+## Copyright 2010-2015 Michael Oberdorf IT-Consulting
+## All rights reserved.
+##
+## Redistribution and use in source and binary forms, with or without
+## modification, are permitted only if authorized by Michael Oberdorf
+## IT-Consulting.
+##
+
+# Depends upon core.schema, cosine.schema, nis.schema and oitc-desfire.schema
+
+# OID Base is iso(1) org(3) dod(6) internet(1) private(4) enterprise(1) Michael Oberdorf IT-Consulting(46756)
+#   1.3.6.1.4.1.46756
+#
+# Attribute types are under 1.3.6.1.4.1.46756.3.2.1
+# Object classes are under 1.3.6.1.4.1.46756.3.2.2
+
+#############################################################################
+# Attribute Type Definitions (1.3.6.1.4.1.46756.3.2.1.x)
+
+# Extension attributes for transponder objects
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.0 NAME 'oitcACSTransponderIsActive'
+        DESC 'RFID transponder is active or disabled'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.1 NAME 'oitcACSTransponderOwnerDN'
+        DESC 'DN as reference to the RFID transponders owners object'
+        EQUALITY distinguishedNameMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.12 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.2 NAME 'oitcACSTransponderRandomSecret'
+        DESC 'A random string of data'
+        EQUALITY caseExactMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
+
+# Extension attributes for user objects
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.3 NAME 'oitcACSRoleName'
+        DESC 'Name of the OITC Access Control System Role(s)'
+        EQUALITY caseIgnoreMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.4 NAME 'oitcBirthday'
+        DESC 'A persons birthday date in format yyyyMMdd'
+        EQUALITY integerMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{8} SINGLE-VALUE )
+
+
+# Extension attributes for role objects
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.5 NAME 'oitcACSSendMailNotification'
+        DESC 'Flag if a mail notification should be send or not'
+        EQUALITY booleanMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+
+# Extension attributes for ipHost objects (ACS access points)
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.6 NAME 'oitcACSEntryPointRules'
+        DESC 'Access rules to limit access to specific entry resources'
+        EQUALITY caseExactMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
+
+# Attributes for ACS Access Rules
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.7 NAME 'oitcACSLimitationWeekday'
+        DESC 'Access rule limitation to limit the access to a specific weekday'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.8 NAME 'oitcACSLimitationDateFrame'
+        DESC 'Access rule limitation to limit the access to a defined date frame'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.9 NAME 'oitcACSLimitationTimeFrame'
+        DESC 'Access rule limitation to limit the access to a defined time frame'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.10 NAME 'oitcACSRelayType'
+        DESC 'The relay type that needs to be triggered to open the entrypoint.'
+        EQUALITY octetStringMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.40 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.46756.3.2.1.11 NAME 'oitcACSrelayConfiguration'
+        DESC 'The relay configuration.'
+        EQUALITY caseExactMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
+
+#############################################################################
+# Object Class Definitions (1.3.6.1.4.1.46756.3.2.2.x)
+
+objectclass (  1.3.6.1.4.1.46756.3.2.2.0 NAME 'oitcACSTransponderExtension'
+        DESC 'Extension for the oitcTransponder object for the OITC Access Control System'
+        SUP top AUXILIARY
+        MUST oitcACSTransponderIsActive
+        MAY ( oitcACSTransponderRandomSecret $ oitcACSTransponderOwnerDN ) )
+
+objectclass ( 1.3.6.1.4.1.46756.3.2.2.1 NAME 'oitcACSUserExtension'
+        DESC 'Extension for the inetOrgPerson object for the OITC Access Control System'
+        SUP top AUXILIARY
+        MAY ( oitcACSRoleName $ oitcBirthday ) )
+
+objectclass ( 1.3.6.1.4.1.46756.3.2.2.2 NAME 'oitcACSRoleExtension'
+        DESC 'Extension for the organizationalRole object for the OITC Access Control System'
+        SUP top AUXILIARY
+        MAY oitcACSSendMailNotification )
+
+objectclass ( 1.3.6.1.4.1.46756.3.2.2.3 NAME 'oitcACSEntryPointExtension'
+        DESC 'Extension for the ipHost object for the OITC Access Control System'
+        SUP top AUXILIARY
+        MAY ( oitcACSEntryPointRules $ oitcACSRelayType ) )
+
+objectclass ( 1.3.6.1.4.1.46756.3.2.2.4 NAME 'oitcACSAccessLimitation'
+        DESC 'OITC Access Control System - Access limitation rule object'
+        SUP top STRUCTURAL
+        MUST cn
+        MAY ( oitcACSLimitationWeekday $ oitcACSLimitationDateFrame $ oitcACSLimitationTimeFrame $
+                description ) )
