@@ -53,6 +53,7 @@ REST API for direct communication with Feig RFID readers. Operates in Host Mode 
 Subscribes to MQTT access events and triggers the corresponding door relay on successful authentication. Controls physical door lock mechanisms.
 
 - Repository: [acs.relay-control-service](https://github.com/oberdorf-itc/acs.relay-control-service)
+- [![Docker Container][relay-control-service-docker-release-shield]][relay-control-service-docker-release-link]
 
 ### 6. SMTP Bridge Service
 
@@ -71,6 +72,9 @@ Sends Pushover push notifications about access attempts to mobile devices. Provi
 ### 8. Logging Service
 
 Logs all access attempts to the OpenSearch database. Provides centralized logging and searchable audit trail for compliance and security analysis.
+
+- Repository: [acs.logging-service](https://github.com/oberdorf-itc/acs.logging-service)
+- [![Docker Container][logging-service-docker-release-shield]][logging-service-docker-release-link]
 
 ### 9. FEIG Reader Notify Service
 
@@ -224,6 +228,10 @@ acs.documentation/
 - [LDAP Integration Guide](docs/ldap-integration.md) - LDAP integration guidelines and schema descriptions
 - [MQTT message reference](docs/mqtt-message-reference.md) - Reference of mesages used inside the MQTT topics send by the ACS
 
+[logging-service-docker-release-link]: https://hub.docker.com/r/oitc/acs.logging-service
+[logging-service-docker-release-shield]: https://img.shields.io/docker/v/oitc/acs.logging-service?color=369eff&label=docker&labelColor=black&logo=docker&logoColor=white&style=flat-square
+[relay-control-service-docker-release-link]: https://hub.docker.com/r/oitc/acs.relay-control-service
+[relay-control-service-docker-release-shield]: https://img.shields.io/docker/v/oitc/acs.relay-control-service?color=369eff&label=docker&labelColor=black&logo=docker&logoColor=white&style=flat-square
 [smtp-bridge-service-docker-release-link]: https://hub.docker.com/r/oitc/acs.smtp-bridge-service
 [smtp-bridge-service-docker-release-shield]: https://img.shields.io/docker/v/oitc/acs.smtp-bridge-service?color=369eff&label=docker&labelColor=black&logo=docker&logoColor=white&style=flat-square
 [pushover-bridge-service-docker-release-link]: https://hub.docker.com/r/oitc/acs.pushover-bridge-service
